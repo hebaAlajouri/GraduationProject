@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Comments</title>
+    <link rel="stylesheet" href="css/commentStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header flex">
+        <a href="#home" class="logo">educa.</a>
+        <nav class="navbar">
+            <a href="index.html" target="_blank">home</a>
+            <a href="about.html" target="_blank">about</a>
+
+            <a href="subjects.html" target="_blank">teachers</a>
+            <a href="comments.html" target="_blank">reviews</a>
+            <a href="#contact">contact</a>
+            <a href="login.html" target="_blank">Login</a>
+        </nav>
+        <div id="menu-btn" class="fas fa-bars"></div>
+    </header>
+    <div class="container">
+        <div class="head">
+            <h1>Post A Comment</h1>
+        </div>
+        <div><span id="comment">0</span> Comments</div>
+        <div class="text">
+            <p>We are happy to hear from you about your experience with our teachers.</p>
+            <div class="comments"></div>
+            <div class="commentbox">
+                <img src="empty.jpeg" alt="">
+                <div class="content">
+                    <h2>Comment as:</h2>
+                    <input type="text" value="Anonymous" class="user">
+                    <div class="comment input">
+                        <h2>Our Teacher's Name:</h2>
+                        <input type="text" value="TeachNam" class="teacher">
+                        <div class="comment input">
+                            <input type="text" placeholder="Enter comment" class="user-comment">
+                            <div class="buttons">
+                                <button type="submit" disabled id="publish">Publish</button>
+                                <div class="notify">
+                                    <input type="checkbox" class="notifyinput"><span>Notify me</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="policy">This site is protected by reCAPTCHA and the Google <a href="#">privacy
+                                policy</a> and <a href="#">Terms of Service</a> apply</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        "use strict";
+
+        const userId = {
+            name: null,
+            identity: null,
+            image: null,
+            message: null,
+            date: null
+        };
+
+        const userComment = document.querySelector(".user-comment");
+        const publishBtn = document.querySelector("#publish");
+        const comments = document.querySelector(".comments");
+        const userName = document.querySelector(".user");
+        const teacherName = document.querySelector(".teacher");
+
+
+        async function fetchComments() {
+            try {
+                const response = await fetch('http://localhost:3000/api/comments');
+                const data = await response.json();
+                renderComments(data);
+            } catch (error) {
+                console.error('Error fetching comments:', error);
+            }
+        }
+
+        function renderComments(data) {
+            comments.innerHTML = '';
+            data.forEach(comment => {
+                const published = `
+                    <div class="parents">
+                        <img src="${comment.image}" alt="User Image">
+                        <div>
+                            <h1>${comment.name}</h1>
+                            <h2>Our teacher's name: ${comment.teacher}</h2>
+                            <p>${comment.message}</p>
+                            <div class="engagements">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                                <i class="fa-solid fa-share"></i>
+                            </div>
+                            <span class="date">${comment.date}</span>
+                        </div>
+                    </div>`;
+                comments.innerHTML += published;
+            });
+
+            const commentsNum = data.length;
+            document.getElementById("comment").textContent = commentsNum;
+        }
+
+        userComment.addEventListener("input", () => {
+            if (!userComment.value) {
+                publishBtn.setAttribute("disabled", "disabled");
+                publishBtn.classList.remove("abled");
+            } else {
+                publishBtn.removeAttribute("disabled");
+                publishBtn.classList.add("abled");
+            }
+        });
+
+        async function addPost() {
+            if (!userComment.value) return;
+            userId.name = userName.value;
+            userId.identity = userId.name !== "Anonymous";
+            userId.image = userId.identity ? "user.png" : "empty.jpeg";
+            userId.message = userComment.value;
+            userId.date = new Date().toLocaleString();
+
+            const newComment = {
+                name: userId.name,
+                teacher: teacherName.value,
+                message: userId.message,
+                date: userId.date,
+                identity: userId.identity,
+                image: userId.image
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/api/comments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newComment)
+                });
+
+                const data = await response.json();
+                fetchComments();
+            } catch (error) {
+                console.error('Error adding comment:', error);
+            }
+
+            userComment.value = "";
+            publishBtn.setAttribute("disabled", "disabled");
+            publishBtn.classList.remove("abled");
+        }
+
+        publishBtn.addEventListener("click", addPost);
+
+
+        fetchComments();
+    </script>
+
+</body>
+
+</html>
