@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="css/style4.css">
+</head>
+
+<body>
+    <div class="container">
+        <section class="contact" id="contact">
+            <h1 class="heading"><span>Sign Up</span></h1>
+            <div class="row">
+                <div class="image">
+                    <img src="https://edulyte-docs.s3.ap-southeast-2.amazonaws.com/website-image/auth-page/sign-up-one.png"
+                        alt="Sign Up Image">
+                </div>
+                <form id="registerForm">
+                    <span>Your email:</span>
+                    <input type="email" required placeholder="Enter a valid email" name="email" class="box">
+                    <span>Your password:</span>
+                    <input type="password" required placeholder="Enter your password" name="password" class="box">
+                    <span>Confirm your password:</span>
+                    <input type="password" required placeholder="Confirm your password" name="confirmpassword"
+                        class="box">
+                    <input type="submit" value="Sign Up" class="btn">
+                    <button class="google-btn">
+                        <a href="#" class="fab fa-google"></a>
+                        Continue with Google
+                    </button>
+                    <button class="google-btn">
+                        <a href="#" class="fab fa-facebook-f"></a>
+                        Continue with Facebook
+                    </button>
+                </form>
+
+            </div>
+        </section>
+    </div>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const email = event.target.email.value;
+            const password = event.target.password.value;
+            const confirmpassword = event.target.confirmpassword.value;
+
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password, confirmpassword })
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        });
+    </script>
+</body>
+
+</html>
