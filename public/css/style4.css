@@ -1,0 +1,506 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+    --green: #00E77F;
+    --white: #fff;
+    --light-white: #aaa;
+    --black: #3d3d3d;
+    --light-bg: #4b4b4b;
+}
+
+* {
+    font-family: "Rubik", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: 0.2s linear;
+    text-transform: capitalize;
+}
+
+*::selection {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.container {
+    width: 800px;
+    height: 605px;
+    margin: auto;
+    padding: 20px;
+    margin-top: 20vh;
+    background-color: var(--light-bg);
+    border-radius: 5px;
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 8rem;
+}
+
+::-webkit-scrollbar {
+    height: 0.5rem;
+    width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--green);
+    border-radius: 5rem;
+}
+
+body {
+    background-color: var(--black);
+}
+
+section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.content .btn {
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: 5rem;
+    background-color: var(--light-bg);
+    cursor: pointer;
+    color: var(--white);
+    font-size: 1.8rem;
+    padding: 1rem 3rem;
+}
+
+.btn:hover {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--light-bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: var(--white);
+}
+
+.navbar a {
+    margin-left: 2rem;
+    color: var(--light-white);
+    font-size: 2rem;
+}
+
+.navbar a:hover {
+    color: var(--green);
+}
+
+#menu-btn {
+    cursor: pointer;
+    color: var(--white);
+    font-size: 2.5rem;
+    display: none;
+}
+
+/* Media queries */
+@media (max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+
+    .content h3 {
+        font-size: 8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #menu-btn {
+        display: block;
+    }
+
+    .navbar {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--light-bg);
+    }
+
+    .navbar.active {
+        display: flex;
+    }
+
+    .navbar a {
+        margin: 1rem 0;
+        text-align: center;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+
+    .about.raw.content h3 {
+        font-size: 5rem;
+    }
+}
+
+.home {
+    margin-top: 6rem;
+}
+
+.home.row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.content {
+    flex: 1 1 40rem;
+    text-align: center;
+}
+
+.content h3 {
+    margin-bottom: 1rem;
+    font-size: 10rem;
+    color: var(--white);
+    line-height: 1;
+}
+
+.content span {
+    color: var(--green);
+}
+
+.box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.box {
+    background-color: var(--light-bg);
+    border-radius: .5rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.box i {
+    font-size: 5rem;
+    color: var(--green);
+}
+
+.box.content h3 {
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: .5rem;
+}
+
+.content p {
+    font-size: 1.6rem;
+    color: var(--light-white);
+}
+
+.about.row.image img {
+    width: 100%;
+}
+
+.about.raw.content {
+    text-align: center;
+    flex: 1 1 40rem;
+}
+
+.about.raw.content h3 {
+    font-size: 3rem;
+    color: var(--white);
+}
+
+.about.raw.content p {
+    padding: 1rem 0;
+    line-height: 2;
+    font-size: 1.6rem;
+    color: var(--light-white);
+}
+
+.heading {
+    margin-bottom: 2.5rem;
+    text-align: center;
+    font-size: 4rem;
+    color: var (--white);
+    text-transform: uppercase;
+}
+
+.heading span {
+    color: var(--green);
+    text-transform: uppercase;
+}
+
+.slide {
+    width: 30rem;
+    background-color: var(--light-bg);
+    border-radius: .5rem;
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 4rem;
+}
+
+.swiper-wrapper.slide img {
+    height: 25rem;
+    width: 100%;
+}
+
+.swiper-wrapper.slide h3 {
+    margin: 1.5rem 0;
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.swiper-wrapper.slide p {
+    line-height: 2;
+    font-size: 1.6rem;
+    color: var(--light-white);
+}
+
+.swiper-pagination-bullet {
+    background-color: var(--white);
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--green);
+}
+
+.teachers.slide {
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+}
+
+.slide img {
+    height: 35rem;
+    width: 100%;
+    object-fit: cover;
+    border-radius: .5rem;
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.teachers.slide h3 {
+    margin-top: 1.5rem;
+    font-size: 2rem;
+    color: var (--white);
+}
+
+.share {
+    position: absolute;
+    top: 1rem;
+    left: -10rem;
+}
+
+.slide:hover .share {
+    left: 2rem;
+}
+
+.slide a {
+    display: inline-block;
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    border-radius: .5rem;
+    background-color: var(--white);
+    color: var(--black);
+    text-align: center;
+    font-size: 2rem;
+    margin: 0 1rem;
+}
+
+.slide a:hover {
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.heading {
+    font-size: 3rem;
+}
+
+.reviews-slider.slide {
+    width: 35rem;
+    border-radius: .5rem;
+    background-color: var(--light-bg);
+    padding: 2rem;
+    margin-bottom: 4rem;
+}
+
+.slide {
+    line-height: 2;
+    font-size: 1.6rem;
+    color: var(--light-white);
+    user-select: none;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.user img {
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user h3 {
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: .7rem;
+}
+
+.stars i {
+    font-size: 1.5rem;
+    color: var(--green);
+}
+
+.contact .row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    flex-direction: row;
+    /* Add this line to place image and form side by side */
+}
+
+.contact .image {
+    flex: 1 1 40%;
+
+    /* Adjust the flex basis to make the image container smaller or larger */
+}
+
+.contact .image img {
+    width: 100%;
+    height: 350px;
+    border-radius: .5rem;
+}
+
+.contact form {
+    flex: 1 1 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    max-width: 400px;
+}
+
+.contact form span {
+    text-align: left;
+    width: 100%;
+    margin-bottom: .5rem;
+}
+
+.contact form .box {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border-radius: .5rem;
+    background-color: var(--white);
+    font-size: 1.8rem;
+    padding: 1.4rem;
+    color: var(--black);
+    /* Change the text color to black */
+}
+
+.contact form .btn {
+    width: 100%;
+}
+
+.contact form .remember-forget {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+    color: var(--green);
+}
+
+.contact form .register-link {
+    margin-top: 2rem;
+    width: 100%;
+    text-align: center;
+    color: var(--green);
+}
+
+form a {
+    color: var(--green);
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: 5rem;
+    background-color: var(--white);
+    cursor: pointer;
+    color: var(--green);
+    font-size: 1.8rem;
+    padding: 1rem 3rem;
+
+}
+
+.btn:hover {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    /* or any other max-width you prefer */
+    padding: 1rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: .5rem;
+    background-color: var(--white);
+    /* Google blue color */
+    color: var(--green);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.google-btn:hover {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.google-btn a {
+    width: 15px;
+    height: 24px;
+    margin-right: 1rem;
+}
