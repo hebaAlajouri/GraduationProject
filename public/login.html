@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style2.css">
+</head>
+
+<body>
+    <header class="header flex">
+
+    </header>
+    <div class="container">
+        <section class="contact" id="contact">
+            <h1 class="heading"><span>Login</span></h1>
+            <div class="row">
+                <div class="image">
+                    <img src="loginpic.jpg" alt="Contact Image">
+                </div>
+                <form id="loginForm">
+                    <span>Your email:</span>
+                    <input type="email" required placeholder="Enter a valid email" name="email" class="box">
+                    <span>Your password:</span>
+                    <input type="password" required placeholder="Enter your password" name="password" class="box">
+                    <input type="submit" value="Login" class="btn">
+                    <button class="google-btn">
+                        <a href="#" class="fab fa-google"></a>
+                        Continue with Google
+                    </button>
+                    <button class="google-btn">
+                        <a href="/auth/google" class="fab fa-google"></a>
+                        Continue with Google
+                    </button>
+
+
+                    <div class="remember-forget">
+                        <label><input type="checkbox">Remember me</label>
+                        <a href="#">Forget password?</a>
+                    </div>
+
+                    <div class="register-link">
+                        <p>Do not have an account? <a href="signUp.html">Sign Up</a></p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const email = event.target.email.value;
+            const password = event.target.password.value;
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.json();
+
+                if (response.status === 404) {
+
+                    window.location.href = '/signUp';
+                } else if (response.ok) {
+
+                    window.location.href = '/';
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+    </script>
+</body>
+
+</html>
