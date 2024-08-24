@@ -227,9 +227,7 @@ section {
     color: var(--light-white);
 }
 
-.about.row.image img {
-    width: 100%;
-}
+
 
 .about.raw.content {
     text-align: center;
