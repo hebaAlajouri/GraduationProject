@@ -143,6 +143,7 @@ body {
 .container {
     background: var(--light-bg);
     padding: 20px;
+    height: auto;
 
     width: 500px;
     box-shadow: 0 0 5px #000;
