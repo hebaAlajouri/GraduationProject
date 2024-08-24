@@ -17,7 +17,7 @@
 <body>
     <!--header section starts-->
     <header class="header flex">
-        <a href="#home" class="logo">educa.</a>
+        <a href="index.html" class="logo"> <img style="width: 150px;height: 50px;" src="WhatsApp Image 2024-08-24 at 13.18.59_1c62543a.jpg"></a>
         <nav class="navbar">
             <a href="index.html" target="_blank">home</a>
             <a href="about.html" target="_blank">about</a>
@@ -35,7 +35,7 @@
         <div class="row">
             <div class="content">
                 <h3>online <span>Secondary School Counselor</span></h3>
-                <a href="#content" class="btn">contact us </a>
+                <a href="#contact" class="btn">contact us </a>
 
 
             </div>
@@ -56,8 +56,8 @@
             <div class="box">
                 <i class="fas fa-graduate"></i>
                 <div class="content">
-                    <h3 style="font-size: medium;">80+</h3>
-                    <p>comments</p>
+                    <h3 style="font-size: medium;">30+</h3>
+                    <p>cities</p>
 
 
                 </div>
@@ -78,15 +78,13 @@
     <!--about section starts-->
     <section class="about" id="about">
         <div class="row">
-            <div class="image">
-                <img src="" alt="">
-            </div>
+            
             <div class="content">
                 <h3>why choose us?</h3>
-                <p>We are a speacilized website of connecting students withe a good match of teachers ,to make the
+                <p>We are a speacilized website of connecting students with a good match of teachers ,to make the
                     tawjihi year so easy and comfortable for students and teachers in jordan .</p>
                 <p>we provide any social media accounts and any communication medium with teachers , and we provide the
-                    ability for any student to tell their opinion about the teachers in our website so that teachers can
+                    ability for any student to tell his/her opinion about the teachers in our website so that teachers can
                     be rated by real opinions of real experiences of real students.</p>
                 <a href="#contact" class="btn">contact us</a>
             </div>
@@ -307,9 +305,7 @@
         </div>
     </section>
     <!--courses section ends-->
-    <!--teachers section starts-->
-
-    <!--teachers section starts-->
+   
     <!--teachers section starts-->
     <section class="teachers" id="teachers">
         <h1 class="heading">expert <span>teachers</span></h1>
@@ -521,14 +517,13 @@
             <div class="image">
                 <img src="homePic1.jpg" alt="Contact Image">
             </div>
-            <form action="" method="post">
+            <form id="contactForm">
                 <span>your name:</span>
                 <input type="text" required placeholder="enter your full name" maxlength="60" name="name" class="box">
                 <span>your email:</span>
                 <input type="email" required placeholder="enter a valid email" maxlength="60" name="email" class="box">
                 <span>your number:</span>
-                <input type="number" required placeholder="enter a valid number" name="number" class="box"
-                    onkeypress="if(this.value.length==10)return false;">
+                <input type="number" required placeholder="enter a valid number" name="number" class="box" onkeypress="if(this.value.length==10)return false;">
                 <span>select a subject:</span>
                 <select name="subject" class="box" required>
                     <option value="" disabled selected>select the subject --</option>
@@ -547,6 +542,7 @@
                 </div>
                 <input type="submit" value="send message" class="btn" name="send">
             </form>
+            
         </div>
     </section>
 
@@ -570,6 +566,34 @@
 
     <!--custom js file link-->
     <script src="js/script.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+        
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+        
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+        
+                if (response.status === 204) { // Check for the 204 No Content status
+                    alert('We will contact you to help you with your problem.');
+                    window.location.href = '/'; // Redirect to home page
+                } else {
+                    alert('There was an issue submitting your message. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error. Please try again.');
+            }
+        });
+        </script>
 </body>
 
 </html>
