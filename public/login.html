@@ -26,14 +26,7 @@
                     <span>Your password:</span>
                     <input type="password" required placeholder="Enter your password" name="password" class="box">
                     <input type="submit" value="Login" class="btn">
-                    <button class="google-btn">
-                        <a href="#" class="fab fa-google"></a>
-                        Continue with Google
-                    </button>
-                    <button class="google-btn">
-                        <a href="/auth/google" class="fab fa-google"></a>
-                        Continue with Google
-                    </button>
+                
 
 
                     <div class="remember-forget">
@@ -49,36 +42,38 @@
         </section>
     </div>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const email = event.target.email.value;
-            const password = event.target.password.value;
+      document.getElementById('loginForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
 
-            try {
-                const response = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-
-                const result = await response.json();
-
-                if (response.status === 404) {
-
-                    window.location.href = '/signUp';
-                } else if (response.ok) {
-
-                    window.location.href = '/';
-                } else {
-                    alert(result.message);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.');
-            }
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
         });
+
+        const result = await response.json();
+
+        if (response.status === 404) {
+            alert('User not found. Please sign up.');
+            window.location.href = '/signUp';
+        } else if (response.status === 400) {
+            alert('Invalid email or password.');
+        } else if (response.ok) {
+            window.location.href = '/';
+        } else {
+            alert('An error occurred. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    }
+});
+
     </script>
 </body>
 
