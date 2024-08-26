@@ -13,17 +13,11 @@
     box-sizing: border-box;
     outline: none;
     border: none;
-    text-decoration: none;
-    transition: 0.2s linear;
+   
     text-transform: capitalize;
 }
 
 
-
-*::selection {
-    background-color: var(--white);
-    color: var(--black);
-}
 
 html {
     font-size: 62.5%;
@@ -41,14 +35,12 @@ html {
     color: var(--white);
     font-size: 1.8rem;
     padding: 1rem 3rem;
-
 }
 
 .btn:hover {
     background-color: var(--white);
     color: var(--black);
 }
-
 
 /* General reset */
 ::-webkit-scrollbar {
@@ -74,17 +66,19 @@ html {
     margin-left: 2rem;
     color: var(--light-white);
     font-size: 2rem;
+    text-decoration: none; /* Remove underline */
 }
 
 .navbar a:hover {
     color: var(--green);
+    text-decoration: none; /* Ensure underline stays removed on hover */
 }
 
 #menu-btn {
     cursor: pointer;
     color: var(--white);
     font-size: 2.5rem;
-    display: none;
+    display: none; /* Initially hidden for desktop */
 }
 
 body {
@@ -107,6 +101,27 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
+}
+
+.header .navbar {
+    display: flex;
+}
+
+.header .navbar.active {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--light-bg);
+    padding: 1rem 2rem;
+}
+
+.header .navbar a {
+    display: block;
+    padding: 1rem;
+    border-bottom: 1px solid var(--green);
+    text-decoration: none; /* Ensure underline stays removed */
 }
 
 /* Main content styling */
@@ -145,4 +160,19 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    #menu-btn {
+        display: block; /* Show menu button on mobile */
+    }
+
+    .header .navbar {
+        display: none; /* Hide navbar on mobile */
+    }
+
+    .header .navbar.active {
+        display: block; /* Show navbar when active */
+    }
 }
