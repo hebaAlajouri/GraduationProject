@@ -20,10 +20,7 @@
     text-transform: capitalize;
 }
 
-*::selection {
-    background-color: var(--white);
-    color: var(--black);
-}
+
 
 .container {
     width: 800px;
@@ -37,9 +34,7 @@
 
 html {
     font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    scroll-padding-top: 8rem;
+ 
 }
 
 ::-webkit-scrollbar {
@@ -475,32 +470,49 @@ form a {
     color: var(--black);
 }
 
-.google-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 400px;
-    /* or any other max-width you prefer */
-    padding: 1rem;
-    margin-top: 1rem;
-    border: none;
-    border-radius: .5rem;
-    background-color: var(--white);
-    /* Google blue color */
-    color: var(--green);
-    font-size: 1.8rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
+/* Media queries */
+@media (max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+
+    .content h3 {
+        font-size: 8rem;
+    }
 }
 
-.google-btn:hover {
-    background-color: var(--white);
-    color: var(--black);
+@media (max-width: 768px) {
+    #menu-btn {
+        display: block;
+    }
+
+    .navbar {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--light-bg);
+    }
+
+    .navbar.active {
+        display: flex;
+    }
+
+    .navbar a {
+        margin: 1rem 0;
+        text-align: center;
+    }
 }
 
-.google-btn a {
-    width: 15px;
-    height: 24px;
-    margin-right: 1rem;
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+
+    .about.raw.content h3 {
+        font-size: 5rem;
+
+    }
 }
