@@ -15,10 +15,7 @@
 
 }
 
-*::selection {
-    background-color: var(--white);
-    color: var(--black);
-}
+
 
 .container {
     width: 800px;
@@ -312,4 +309,50 @@ button:hover {
 .date {
     color: var(--black);
     font-size: 0.3cm;
+}
+/* Media queries */
+@media (max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+
+    .content h3 {
+        font-size: 8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #menu-btn {
+        display: block;
+    }
+
+    .navbar {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--light-bg);
+    }
+
+    .navbar.active {
+        display: flex;
+    }
+
+    .navbar a {
+        margin: 1rem 0;
+        text-align: center;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+
+    .about.raw.content h3 {
+        font-size: 5rem;
+
+    }
 }
